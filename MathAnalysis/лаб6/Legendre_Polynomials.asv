@@ -1,0 +1,26 @@
+clc
+clear
+
+L = 1;
+Leg = L;
+n = 4;
+if (~n==0)
+    for i = 1 : n
+       L = conv([1,0,-1],L);
+    end
+    for i = 1 : n
+        for j = 1 : 2 : length(L)
+            L(j) = (length(L) - j) * L(j);
+        end
+        Leg = zeros (1, length(L)-i);
+        for k = 1 : 2 : length(L)-i
+            Leg(k) = L(k);
+        end
+    end
+
+    koef = 1/(2^n * fact(n));
+    Leg = Leg.*koef;
+end
+x = 0:1:1000;
+plot (x,Leg); grid on; 
+roots(Leg);
